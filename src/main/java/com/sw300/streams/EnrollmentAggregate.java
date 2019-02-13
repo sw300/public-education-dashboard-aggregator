@@ -45,7 +45,7 @@ public class EnrollmentAggregate {
         initialTotal.put("totalTime", 0);
 
 
-        KTable<String, JsonNode> wordCounts = textLines
+        KTable<String, JsonNode> enrollments = textLines
                 .groupByKey(Serdes.String(), jsonSerde)  //키 값으로 묶어주네
                // .map((key, value) -> new KeyValue<>(value, value))
                 .aggregate(
@@ -62,7 +62,7 @@ public class EnrollmentAggregate {
 
 
         // 7 - to in order to write the results back to kafka
-        wordCounts.to(Serdes.String(), jsonSerde, "enrollment-total-output");
+        enrollments.to(Serdes.String(), jsonSerde, "enrollment-total-output");
 
         KafkaStreams streams = new KafkaStreams(builder, config);
         streams.start();
