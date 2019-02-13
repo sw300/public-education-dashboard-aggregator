@@ -1,4 +1,4 @@
-package com.github.simplesteph.udemy.kafka.streams;
+package com.sw300.streams;
 
 import java.util.Properties;
 import java.util.Arrays;
