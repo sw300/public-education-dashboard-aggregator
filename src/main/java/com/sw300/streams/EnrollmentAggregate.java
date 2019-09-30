@@ -79,8 +79,9 @@ public class EnrollmentAggregate {
         // create a new balance json object
         ObjectNode newTotal = JsonNodeFactory.instance.objectNode();
         newTotal.put("count", total.get("count").asInt() + 1);
-        newTotal.put("totalPrice", total.get("totalPrice").asInt() + enrollment.get("price").asInt());
-        newTotal.put("totalTime", total.get("totalTime").asInt() + enrollment.get("hour").asInt());
+
+        newTotal.put("totalPrice", total.get("totalPrice").asInt() + (enrollment.get("price")==null ? 0 : enrollment.get("price").asInt()));
+        newTotal.put("totalTime", total.get("totalTime").asInt() + (enrollment.get("hour")==null ?  0 : enrollment.get("hour").asInt()));
 
         return newTotal;
     }
